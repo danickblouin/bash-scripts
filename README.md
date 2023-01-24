@@ -1,6 +1,14 @@
 # bash-script
 
-Repo to stock all my bash scripts that I make as I learn how properly to use Linux
+Repo to stock all my bash scripts that I make as I learn how properly to use bash scripts.
+
+### Installation
+
+To make the scripts executable run this command: `chmox a+x <filename>`.
+
+To make it executable from anywhere run this command (on Apple Silicon): 
+
+`sudo ln -s <path_to_original> </usr/local/bin/name_of_the_script>`.
 
 ### youtubeUrlTitleParse
 Script to output a list of youtube video with their titles from a txt files full of youtube links

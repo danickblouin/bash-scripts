@@ -1,0 +1,4 @@
+#!/bin/sh
+# Remove spaces in the names of all files in the current directory
+
+for f in *\ *; do mv "$f" "${f// /_}"; done
