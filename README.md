@@ -12,3 +12,6 @@ To make it executable from anywhere run this command (on Apple Silicon):
 
 ### youtubeUrlTitleParse
 Script to output a list of youtube video with their titles from a txt files full of youtube links
+
+### removeChar
+Removes character passed in parameter for all files titles in the current directory.

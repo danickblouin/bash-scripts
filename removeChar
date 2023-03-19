@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Remove character from all files in the current directory
+
+char_to_remove=$1
+
+for file in *; do
+    if [[ -f "$file" ]]; then
+        filename=$(basename -- "$file")
+        extension="${filename##*.}"
+        filename="${filename%.*}"
+        new_name=$(echo "$filename" | tr -d "$char_to_remove")."$extension"
+        if [[ "$new_name" != "$file" ]]; then
+            mv "$file" "$new_name"
+        fi
+    fi
+done
