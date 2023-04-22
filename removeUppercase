@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Remove uppercase letter in every files in the current directory
+
+# Loop through every file in the current directory
+for file in *
+do
+  # Check if the file is a regular file
+  if [ -f "$file" ]
+  then
+    # Replace all capital letters with lowercase letters
+    new_filename=$(echo "$file" | tr 'A-Z' 'a-z')
+    # Rename the file
+    mv "$file" "$new_filename"
+  fi
+done
