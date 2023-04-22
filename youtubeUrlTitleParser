@@ -1,13 +1,15 @@
 #!/bin/bash
+
 #Script to output a list of youtube video with their titles from a txt files full of youtube links
 
-#input=url.txt
-#output=outpux.txt
+# Define input and output files
+input_file=$1
+output_file=$2
 
-cat url.txt | while read line
+cat "$input_file" | while read line
 do
-	results=$(youtube-dl --get-title $line)
+	results=$(yt-dlp --get-title "$line")
 	echo "$results - $line"
-done > output.txt
+done > "$output_file"
 
-sort -o output.txt output.txt
+sort -o "$output_file" "$output_file"
