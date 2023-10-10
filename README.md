@@ -4,7 +4,7 @@ Repo to stock all my bash scripts that I make as I learn how properly to use bas
 
 ### Installation
 
-To make the scripts executable run this command: `chmox a+x <filename>`.
+To make the scripts executable run this command: `chmod a+x <filename>`.
 
 To make it executable from anywhere run this command (on Apple Silicon): 
 
