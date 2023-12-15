@@ -1,0 +1,11 @@
+#!/bin/bash
+
+args="$2"
+
+for arg in "${@:3}"
+do
+    args="${args}[\w|\W]{0,${1}}${arg}"
+done
+
+echo $args
+pdfgrep --color=always -nPirC 2 "${args}"
