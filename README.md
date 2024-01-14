@@ -23,3 +23,9 @@ Removes character passed in parameter for all files titles in the current direct
 Search for words in a PDF with `pdfgrep` by indicating the number of words that can separate the two words.
 
 Usage: `pfind <separator_count> <words>`
+
+### hs
+
+Script to connect my different bluetooth headphones from the terminal with blueutil.
+
+Usage: `hs -<c|d><s|n>`
