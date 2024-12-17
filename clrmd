@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# clrmd - Comprehensive metadata removal script
+# Usage: clrmd *.pdf *.jpg *.docx
+
+if [ "$#" -eq 0 ]; then
+    echo "Usage: $0 file1 file2 ... (wildcards supported)"
+    exit 1
+fi
+
+# Check for required dependencies
+if ! command -v exiftool &> /dev/null; then
+    echo "Error: exiftool is not installed. Install it with 'brew install exiftool'."
+    exit 1
+fi
+
+if ! command -v xattr &> /dev/null; then
+    echo "Error: xattr is not available on your system."
+    exit 1
+fi
+
+# Loop through each file passed as an argument
+for file in "$@"; do
+    if [ -f "$file" ]; then
+        echo "Processing: $file"
+
+        # Step 1: Remove all internal metadata irreversibly with ExifTool
+        echo "Removing internal metadata with ExifTool..."
+        exiftool -all= -overwrite_original -pdf-update:All "$file" > /dev/null 2>&1
+
+        if [ $? -ne 0 ]; then
+            echo "Error: ExifTool failed to clean metadata for $file."
+            continue
+        fi
+
+        # Step 2: Remove extended attributes
+        echo "Removing extended attributes..."
+        sudo xattr -cr "$file" > /dev/null 2>&1
+
+        # Step 3: Verify extended attributes removal
+        if [[ $(xattr -l "$file") ]]; then
+            echo "Warning: Extended attributes still exist on $file. Try manual removal with 'sudo xattr -cr $file'."
+        else
+            echo "Extended attributes successfully removed."
+        fi
+
+        echo "Metadata cleaned: $file"
+    else
+        echo "Skipping (not a file): $file"
+    fi
+done
+
+echo "All done!"

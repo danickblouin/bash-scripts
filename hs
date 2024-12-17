@@ -5,6 +5,26 @@ DEVICE_SONY="94-db-56-6e-d9-34"
 DEVICE_NOTHING="2c-be-eb-0b-1c-ee"
 BLUEUTIL_CMD="blueutil"
 
+# Check if blueutil is installed
+if ! command -v $BLUEUTIL_CMD &> /dev/null; then
+    echo "$BLUEUTIL_CMD could not be found."
+    read -p "Do you want to install blueutil? (y/n) " answer
+    case ${answer:0:1} in
+        y|Y )
+            echo "Installing blueutil..."
+            brew install blueutil
+            if [ $? -ne 0 ]; then
+                echo "Installation failed. Please install blueutil manually."
+                exit 1
+            fi
+            ;;
+        * )
+            echo "blueutil is required to run this script."
+            exit 1
+            ;;
+    esac
+fi
+
 # Function to connect to a device
 connect_device() {
     if [ `$BLUEUTIL_CMD --is-connected $2` -eq 0 ]; then
